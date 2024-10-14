@@ -1,44 +1,53 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
 from . import models
 from . import forms
 
-
+@login_required
 def faculty(request):
      faculties = models.Faculty.objects.all()
      f = 'f'
      ctx = {'faculties': faculties, 'f': f}
      return render(request, 'faculty_list.html', ctx)
 
+@login_required
 def group(request):
     groups = models.Group.objects.all()
     g = 'g'
     ctx = {'groups': groups, 'g': g}
     return render(request, 'faculty_list.html', ctx)
 
+@login_required
 def department(request):
     departments = models.Department.objects.all()
     d = 'd'
     ctx = {'departments': departments, 'd': d}
     return render(request, 'faculty_list.html', ctx)
 
+@login_required
 def student(request):
     students = models.Student.objects.all()
     s = 's'
     ctx = {'students': students, 's': s}
     return render(request, 'faculty_list.html', ctx)
 
+@login_required
 def subject(request):
     subjects = models.Subject.objects.all()
     su = 'su'
     ctx = {'subjects': subjects, 'su': su}
     return render(request, 'faculty_list.html', ctx)
 
+@login_required
 def teacher(request):
     teachers = models.Teacher.objects.all()
     t = 't'
     ctx = {'teachers': teachers, 't': t}
     return render(request, 'faculty_list.html', ctx)
 
+@login_required
 def faculty_form(request):
     teg = """
         <h1 style="text-align: center">Form is invalid</h1>
@@ -54,7 +63,7 @@ def faculty_form(request):
     ctx = {'forms': forms.FacultyForm}
     return render(request, 'faculty_form.html', ctx)
 
-
+@login_required
 def group_form(request):
     teg = """
         <h1 style="text-align: center">Form is invalid</h1>
@@ -71,7 +80,7 @@ def group_form(request):
     ctx = {'forms': forms.GroupForm, 'group': group_confirm}
     return render(request, 'faculty_form.html', ctx)
 
-
+@login_required
 def department_form(request):
     teg = """
         <h1 style="text-align: center">Form is invalid</h1>
@@ -88,7 +97,7 @@ def department_form(request):
     ctx = {'forms': forms.DepartmentForm, 'department': department_confirm}
     return render(request, 'faculty_form.html', ctx)
 
-
+@login_required
 def student_form(request):
     teg = """
         <h1 style="text-align: center">Form is invalid</h1>
@@ -105,7 +114,7 @@ def student_form(request):
     ctx = {'forms': forms.StudentForm, 'student': student_confirm}
     return render(request, 'faculty_form.html', ctx)
 
-
+@login_required
 def subject_form(request):
     teg = """
         <h1 style="text-align: center">Form is invalid</h1>
@@ -122,7 +131,7 @@ def subject_form(request):
     ctx = {'forms': forms.SubjectForm, 'subject': subject_confirm}
     return render(request, 'faculty_form.html', ctx)
 
-
+@login_required
 def teacher_form(request):
     teg = """
         <h1 style="text-align: center">Form is invalid</h1>
@@ -139,6 +148,7 @@ def teacher_form(request):
     ctx = {'forms': forms.TeacherForm, 'teacher': teacher_confirm}
     return render(request, 'faculty_form.html', ctx)
 
+@login_required
 def update_faculty(request, pk):
     faculty_update = get_object_or_404(models.Faculty, pk=pk)
     teg = """
@@ -155,6 +165,7 @@ def update_faculty(request, pk):
     form = {'forms': forms.FacultyForm(instance=faculty_update), 'f': faculty_update}
     return render(request, 'faculty_form.html', form)
 
+@login_required
 def update_group(request, pk):
     group_update = get_object_or_404(models.Group, pk=pk)
     teg = """
@@ -171,6 +182,7 @@ def update_group(request, pk):
     form = {'forms': forms.GroupForm(instance=group_update), 'g': group_update}
     return render(request, 'faculty_form.html', form)
 
+@login_required
 def update_department(request, pk):
     department_update = get_object_or_404(models.Department, pk=pk)
     teg = """
@@ -187,6 +199,7 @@ def update_department(request, pk):
     form = {'forms': forms.DepartmentForm(instance=department_update), 'd': department_update}
     return render(request, 'faculty_form.html', form)
 
+@login_required
 def update_student(request, pk):
     student_update = get_object_or_404(models.Student, pk=pk)
     teg = """
@@ -203,6 +216,7 @@ def update_student(request, pk):
     form = {'forms': forms.StudentForm(instance=student_update), 's': student_update}
     return render(request, 'faculty_form.html', form)
 
+@login_required
 def update_subject(request, pk):
     subject_update = get_object_or_404(models.Subject, pk=pk)
     teg = """
@@ -219,6 +233,7 @@ def update_subject(request, pk):
     form = {'forms': forms.SubjectForm(instance=subject_update), 'su': subject_update}
     return render(request, 'faculty_form.html', form)
 
+@login_required
 def update_teacher(request, pk):
     teacher_update = get_object_or_404(models.Teacher, pk=pk)
     teg = """
@@ -235,6 +250,7 @@ def update_teacher(request, pk):
     form = {'forms': forms.TeacherForm(instance=teacher_update), 't': teacher_update}
     return render(request, 'faculty_form.html', form)
 
+@login_required
 def delete_faculty(request, pk):
 
     faculty_delete = get_object_or_404(models.Faculty, pk=pk)
@@ -243,8 +259,9 @@ def delete_faculty(request, pk):
         faculty_delete.delete()
         return redirect('faculty_list')
 
-    return render(request, 'confirm.html', {'f': faculty_delete})
+    return render(request, 'confirm.html', {'faculty': faculty_delete})
 
+@login_required
 def delete_group(request, pk):
 
     group_delete = get_object_or_404(models.Group, pk=pk)
@@ -257,6 +274,7 @@ def delete_group(request, pk):
     ctx = {'group': group_delete, 'g': g}
     return render(request, 'confirm.html', ctx)
 
+@login_required
 def delete_department(request, pk):
 
     department_delete = get_object_or_404(models.Department, pk=pk)
@@ -269,6 +287,7 @@ def delete_department(request, pk):
     ctx = {'department': department_delete, 'd': d}
     return render(request, 'confirm.html', ctx)
 
+@login_required
 def delete_student(request, pk):
 
     student_delete = get_object_or_404(models.Student, pk=pk)
@@ -281,6 +300,7 @@ def delete_student(request, pk):
     ctx = {'student': student_delete, 's': s}
     return render(request, 'confirm.html', ctx)
 
+@login_required
 def delete_subject(request, pk):
 
     subject_delete = get_object_or_404(models.Subject, pk=pk)
@@ -293,6 +313,7 @@ def delete_subject(request, pk):
     ctx = {'subject': subject_delete, 'su': su}
     return render(request, 'confirm.html', ctx)
 
+@login_required
 def delete_teacher(request, pk):
 
     teacher_delete = get_object_or_404(models.Teacher, pk=pk)
@@ -305,6 +326,7 @@ def delete_teacher(request, pk):
     ctx = {'teacher': teacher_delete, 't': t}
     return render(request, 'confirm.html', ctx)
 
+@login_required
 def dashboard(request):
     faculties_count = models.Faculty.objects.count()
     groups_count = models.Group.objects.count()

@@ -41,25 +41,25 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active">
-                            <a href="{% url 'dashboard' %}"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            <a href="{% url 'crm_university:dashboard' %}"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="{% url 'faculty_list' %}"><i class="fas fa-chart-bar"></i>Faculty</a>
+                            <a href="{% url 'crm_university:faculty_list' %}"><i class="fas fa-chart-bar"></i>Faculty</a>
                         </li>
                         <li>
-                            <a href="{% url 'department_list' %}"><i class="fas fa-chart-bar"></i>Department</a>
+                            <a href="{% url 'crm_university:department_list' %}"><i class="fas fa-chart-bar"></i>Department</a>
                         </li>
                         <li>
-                            <a href="{% url 'subject_list' %}"><i class="fas fa-chart-bar"></i>Subject</a>
+                            <a href="{% url 'crm_university:subject_list' %}"><i class="fas fa-chart-bar"></i>Subject</a>
                         </li>
                         <li>
-                            <a href="{% url 'teacher_list' %}"><i class="fas fa-chart-bar"></i>Teacher</a>
+                            <a href="{% url 'crm_university:teacher_list' %}"><i class="fas fa-chart-bar"></i>Teacher</a>
                         </li>
                         <li>
-                            <a href="{% url 'group_list' %}"><i class="fas fa-chart-bar"></i>Group</a>
+                            <a href="{% url 'crm_university:group_list' %}"><i class="fas fa-chart-bar"></i>Group</a>
                         </li>
                         <li>
-                            <a href="{% url 'student_list' %}"><i class="fas fa-chart-bar"></i>Student</a>
+                            <a href="{% url 'crm_university:student_list' %}"><i class="fas fa-chart-bar"></i>Student</a>
                         </li>
                     </ul>
                 </nav>
@@ -109,7 +109,7 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="logout.html">
+                                                <a href="{% url 'users:logout' %}">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
